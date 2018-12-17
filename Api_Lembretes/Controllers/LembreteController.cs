@@ -9,6 +9,7 @@ using Api_Lembretes.Models;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using System.Web.Http.Description;
+using System.Web.Http.Cors;
 
 namespace Api_Lembretes.Controllers
 {
@@ -16,8 +17,9 @@ namespace Api_Lembretes.Controllers
     {
 
         ModelLembrete db = new ModelLembrete();
-        
+
         // GET: api/Lembrete
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public async Task <IHttpActionResult> GetLembretes()
         {
             var lembretes = await (db.tb_Lembrete.ToListAsync());
@@ -75,9 +77,10 @@ namespace Api_Lembretes.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        
         // DELETE: api/Lembrete/5
         [HttpDelete]
+        [EnableCors(origins: "http://localhost:4200", headers:"*", methods:"*")]
         public IHttpActionResult DeleteLembrete(int id)
         {
             try
