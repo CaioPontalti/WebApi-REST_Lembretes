@@ -22,7 +22,7 @@ namespace Api_Lembretes.Controllers
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public async Task <IHttpActionResult> GetLembretes()
         {
-            var lembretes = await (db.tb_Lembrete.ToListAsync());
+            var lembretes = await (db.tb_Lembrete.OrderBy(tb => tb.Prioridade).ToListAsync());
 
             if (lembretes == null)
             {
@@ -33,6 +33,7 @@ namespace Api_Lembretes.Controllers
         }
 
         // GET: api/Lembrete/5
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> GetLembrete (int id)
         {
             var lembrete = await db.tb_Lembrete.Where(t => t.Id == id).FirstOrDefaultAsync();
@@ -46,6 +47,7 @@ namespace Api_Lembretes.Controllers
         }
 
         // POST: api/Lembrete
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public IHttpActionResult PostLembrete (tb_Lembrete lembrete)
         {
             try
@@ -63,6 +65,7 @@ namespace Api_Lembretes.Controllers
 
         // PUT: api/Lembrete/5
         [HttpPut]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public IHttpActionResult PutLembrete(tb_Lembrete lembrete)
         {
             try
